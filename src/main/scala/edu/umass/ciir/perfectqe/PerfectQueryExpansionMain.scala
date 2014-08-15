@@ -41,7 +41,7 @@ object PerfectQueryExpansionMain {
     }
 
 
-    val reranker = new StrepsiReRanker(fc, RANKER_TYPE.COOR_ASCENT)
+    val reranker = new StrepsiReRanker[String](fc, RANKER_TYPE.COOR_ASCENT, serial = x =>x)
     val metricScorer = new APScorer()
     metricScorer.setRelDocCount(queryId, truth.count(_ > 0))
     reranker.trainTestSplit(Set(queryId), Some(fc.defaultFeatures), metricScorer = metricScorer,
